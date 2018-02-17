@@ -27,6 +27,7 @@ colors = [
     "#000080",
     "#808080"
 ]
+color_counter = 0
 
 app = Flask(__name__)
 
@@ -79,6 +80,7 @@ def hello_world():
 
 @app.route('/register', methods=['POST'])
 def register():  ## {username: ""}
+    global color_counter
     print_("register")
     print_(usernames)
 
@@ -88,7 +90,15 @@ def register():  ## {username: ""}
     username = userinfo['username']
 
     if username != "" and username not in usernames.keys():
-        color = random.choice(colors)
+        try:
+            color = colors[color_counter]
+        except:
+            color = colors[0]
+
+        color_counter += 1
+        if color_counter == len(colors):
+            color_counter = 0
+
         usernames[username] = color
         return json.dumps({'status': 'success', 'color': color, 'id': -1, 'username':username})
     else:
