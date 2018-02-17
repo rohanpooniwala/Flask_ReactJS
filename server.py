@@ -4,6 +4,7 @@ import json
 import sys
 import random
 from time import gmtime, strftime
+import numpy as np
 
 colors = [
     "#e6194b",
@@ -34,12 +35,19 @@ app = Flask(__name__)
 
 count = 0
 
+messages_file = "./temp_messages.npy"
+
 # send -> recieve a message on server
 # get_messages (id)-> sends all mesages after an id
 # register(username) -> create a new user name
 # log out -> delete given username
 usernames = {}
 messages = []
+
+try:
+    messages = np.load(messages_file).tolist()
+except:
+    pass
 
 
 def get_time():
@@ -128,6 +136,9 @@ def send_message():  ## {username: "", message:""}
             'username': username,
             'color': usernames[username]
         })
+
+        np.save(messages_file, messages)
+
         return json.dumps({'status': 'success'})
 
     else:
@@ -140,9 +151,9 @@ def get_message():  ## {id: 12}
 
     id = request.json['id']
     if len(messages) == 0:
-        return json.dumps({'status': 'success', "id":-1, "messages":getMessagesAfterID(id)})
+        return json.dumps({'status': 'success', "id":-1, "messages":[], "usercount": len(usernames.keys())})
     else:
-        return json.dumps({'status': 'success', "id": messages[-1]['id'], "messages": getMessagesAfterID(id)})
+        return json.dumps({'status': 'success', "id": messages[-1]['id'], "messages": getMessagesAfterID(id), "usercount": len(usernames.keys())})
 
 
 @app.route('/logout', methods=['POST'])
