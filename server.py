@@ -87,14 +87,10 @@ def print_(_):
 
 @app.route('/')
 def root():
-    global count
-    # return 'http://192.168.0.2:1212/get_image'
     return send_from_directory('build', 'index.html')
 
 @app.route('/app')
 def app():
-    global count
-    # return 'http://192.168.0.2:1212/get_image'
     return send_from_directory('build', 'index.html')
 
 @app.route('/register', methods=['POST'])
