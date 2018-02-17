@@ -1,16 +1,35 @@
 from flask import Flask, render_template, send_from_directory
-from flask_cors import CORS
 from flask import request
 import json
 import sys
 import random
 from time import gmtime, strftime
 
-colors = ["#%06x" % random.randint(0, 0xFFFFFF) for _ in range(20)]
+colors = [
+    "#e6194b",
+    "#3cb44b",
+    "#ffe119",
+    "#0082c8",
+    "#f58231",
+    "#911eb4",
+    "#46f0f0",
+    "#f032e6",
+    "#d2f53c",
+    "#fabebe",
+    "#008080",
+    "#e6beff",
+    "#aa6e28",
+    "#fffac8",
+    "#800000",
+    "#aaffc3",
+    "#808000",
+    "#ffd8b1",
+    "#000080",
+    "#808080"
+]
 
 app = Flask(__name__)
 
-CORS(app)
 
 count = 0
 
