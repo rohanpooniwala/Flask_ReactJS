@@ -35,7 +35,7 @@ colors = [
     "#808080"
 ]
 color_counter = 0
-names = [_[:-1].lower() for _ in open("./names.txt")]
+names = [_[:-1].lower() for _ in open("./Flask_ReactJS/names.txt")]
 count = 0
 messages_file = "./temp_messages.npy"
 
