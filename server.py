@@ -1,10 +1,13 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, send_from_directory
 from flask import request
 import json
 import sys
 import random
+import time
 from time import gmtime, strftime
 import numpy as np
+
+time.tzset()
 
 colors = [
     "#e6194b",
@@ -79,7 +82,7 @@ def print_(_):
     print(_, file=sys.stdout)
 
 
-@app.route('/')
+@app.route('/app')
 def hello_world():
     global count
     # return 'http://192.168.0.2:1212/get_image'
