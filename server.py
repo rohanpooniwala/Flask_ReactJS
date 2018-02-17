@@ -90,7 +90,7 @@ def root():
     return send_from_directory('build', 'index.html')
 
 @app.route('/app')
-def app():
+def app_root():
     return send_from_directory('build', 'index.html')
 
 @app.route('/register', methods=['POST'])
