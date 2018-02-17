@@ -175,6 +175,7 @@ def logout():  ## {id: 12}
     print_(userinfo)
 
     username = userinfo['username']
+    username = username.replace(" ", "").lower()
 
     if username != "" and username in usernames.keys():
         usernames.pop(username)
