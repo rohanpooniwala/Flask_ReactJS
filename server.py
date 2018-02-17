@@ -85,7 +85,7 @@ def print_(_):
     print(_, file=sys.stdout)
 
 
-@app.route('/app')
+@app.route('/')
 def hello_world():
     global count
     # return 'http://192.168.0.2:1212/get_image'
@@ -102,7 +102,7 @@ def register():  ## {username: ""}
     print_(userinfo)
 
     username = userinfo['username']
-    username.replace(" ", "")
+    username = username.replace(" ", "").lower()
 
     if username in names:
         return json.dumps({'status': 'fail'})
