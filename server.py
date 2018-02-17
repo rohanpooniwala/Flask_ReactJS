@@ -7,7 +7,10 @@ import time
 from time import gmtime, strftime
 import numpy as np
 
-time.tzset()
+try:
+    time.tzset()
+except:
+    pass
 
 colors = [
     "#e6194b",
@@ -32,13 +35,13 @@ colors = [
     "#808080"
 ]
 color_counter = 0
+names = [_[:-1].lower() for _ in open("./names.txt")]
+count = 0
+messages_file = "./temp_messages.npy"
+
 
 app = Flask(__name__)
 
-
-count = 0
-
-messages_file = "./temp_messages.npy"
 
 # send -> recieve a message on server
 # get_messages (id)-> sends all mesages after an id
@@ -99,6 +102,10 @@ def register():  ## {username: ""}
     print_(userinfo)
 
     username = userinfo['username']
+    username.replace(" ", "")
+
+    if username in names:
+        return json.dumps({'status': 'fail'})
 
     if username != "" and username not in usernames.keys():
         try:
